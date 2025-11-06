@@ -1,6 +1,7 @@
 <script>
   import { onMount } from 'svelte';
   
+  const LOAD_ANIMATION_DELAY = 100;
   const logoUrl = "https://obj.miinet.cloud/branding/Wit.svg";
   const fallbackLogo = "data:image/svg+xml,%3Csvg width='400' height='120' xmlns='http://www.w3.org/2000/svg'%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Helvetica,Arial,sans-serif' font-size='48' font-weight='700' fill='%23ffffff'%3EMIINETCLOUD%3C/text%3E%3C/svg%3E";
   
@@ -10,7 +11,7 @@
   onMount(() => {
     setTimeout(() => {
       loaded = true;
-    }, 100);
+    }, LOAD_ANIMATION_DELAY);
   });
   
   function handleLogoError() {
