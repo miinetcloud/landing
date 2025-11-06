@@ -2,20 +2,31 @@
   import { onMount } from 'svelte';
   
   const logoUrl = "https://obj.miinet.cloud/branding/Wit.svg";
+  const fallbackLogo = "data:image/svg+xml,%3Csvg width='400' height='120' xmlns='http://www.w3.org/2000/svg'%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Helvetica,Arial,sans-serif' font-size='48' font-weight='700' fill='%23ffffff'%3EMIINETCLOUD%3C/text%3E%3C/svg%3E";
   
   let loaded = false;
+  let logoError = false;
   
   onMount(() => {
     setTimeout(() => {
       loaded = true;
     }, 100);
   });
+  
+  function handleLogoError() {
+    logoError = true;
+  }
 </script>
 
 <main class:loaded>
   <div class="container">
     <div class="logo-section">
-      <img src={logoUrl} alt="MiinetCloud" class="logo" />
+      <img 
+        src={logoError ? fallbackLogo : logoUrl} 
+        alt="MiinetCloud" 
+        class="logo"
+        on:error={handleLogoError}
+      />
     </div>
     
     <nav class="nav-section">
@@ -84,6 +95,13 @@
     height: auto;
     display: block;
     animation: pulse 2s ease-in-out 1s infinite;
+    animation-play-state: running;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .logo {
+      animation: none;
+    }
   }
 
   @keyframes pulse {
