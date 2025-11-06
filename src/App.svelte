@@ -95,13 +95,6 @@
     height: auto;
     display: block;
     animation: pulse 2s ease-in-out 1s infinite;
-    animation-play-state: running;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .logo {
-      animation: none;
-    }
   }
 
   @keyframes pulse {
@@ -240,6 +233,33 @@
       font-size: 20px;
       padding: 20px 30px;
       letter-spacing: 1.5px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+
+    main {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .logo-section {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .btn {
+      transform: translateX(0);
+      opacity: 1;
+    }
+
+    .logo {
+      animation: none;
     }
   }
 </style>
