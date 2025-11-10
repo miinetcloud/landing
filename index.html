@@ -1,12 +1,137 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MiinetCloud</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
-  </body>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MIINET</title>
+</head>
+
+<body>
+    <div class="container">
+        <img src="https://obj.miinet.cloud/branding/Wit.svg" width="430">
+
+        <div class="row">
+            <button class="btn btn-filled" onclick="navigateTo('https:\/\/github.com/miinetcloud')">
+                <span class="text">Github</span>
+                <span aria-hidden="" class="marquee">Github</span>
+            </button>
+
+            <button class="btn" onclick="navigateTo('https:\/\/identity.miinet.cloud')">
+                <span class="text">Authenticate</span>
+                <span aria-hidden="" class="marquee">Auth</span>
+            </button>
+        </div>
+    </div>
+
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #000000;
+            overflow: hidden;
+        }
+
+        .container {
+            display: flex;
+            text-align: center;
+            flex-direction: column;
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+
+        .btn {
+            background-color: #000;
+            color: #fff;
+            cursor: pointer;
+            font-weight: 900;
+            text-transform: uppercase;
+            width: 49%;
+            border: 2px solid;
+            overflow: hidden;
+            padding: 0.8rem 3rem;
+            position: relative;
+        }
+
+        .btn-filled {
+            background-color: #fff;
+            color: #000;
+        }
+
+
+        .btn-filled .marquee {
+            color: #000 !important;
+            text-shadow: #000 var(--spacing) 0, #000 calc(var(--spacing) * -1) 0,
+                #000 calc(var(--spacing) * -2) 0 !important;
+        }
+
+        .btn span {
+            display: grid;
+            inset: 0;
+            place-items: center;
+            position: absolute;
+            transition: opacity 0.2s ease;
+        }
+
+        .btn .marquee {
+            --spacing: 5em;
+            --start: 0em;
+            --end: 5em;
+            animation: marquee 1s linear infinite paused;
+            opacity: 0;
+            position: relative;
+            text-shadow: #fff var(--spacing) 0, #fff calc(var(--spacing) * -1) 0,
+                #fff calc(var(--spacing) * -2) 0;
+        }
+
+        .btn:hover .marquee {
+            animation-play-state: running;
+            opacity: 1;
+        }
+
+        .btn:hover .text {
+            opacity: 0;
+        }
+
+        @keyframes marquee {
+            0% {
+                transform: translateX(var(--start));
+            }
+
+            to {
+                transform: translateX(var(--end));
+            }
+        }
+    </style>
+
+    <script>
+        function navigateTo(url) {
+            const buttons = document.querySelectorAll('.btn');
+            buttons.forEach(button => {
+                button.addEventListener('click', () => {
+                    button.style.transition = 'all 2s cubic-bezier(0, 0.55, 0.45, 1)';
+                    button.style.transform = 'scale(50)';
+                    button.querySelector('.text').style.opacity = '0';
+                    button.querySelector('.marquee').style.opacity = '0';
+                    button.style.zIndex = '9999';
+                    setTimeout(() => {
+                        window.location.href = url;
+                    }, 1500);
+                });
+            });
+
+        }
+
+    </script>
+</body>
+
 </html>
